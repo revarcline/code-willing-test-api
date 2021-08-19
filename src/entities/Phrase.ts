@@ -1,24 +1,30 @@
 export interface IPhrase {
-  id: number;
   original: string;
   pigLatin: string;
 }
 
 class Phrase implements IPhrase {
-  public id: number;
   public original: string;
   public pigLatin: string;
 
-  constructor(originalOrUser: string | IUser, pigLatin?: string, id?: number) {
-    if (typeof originalOrUser === "string") {
-      this.original = originalOrUser;
-      this.pigLatin = pigLatin || "";
-      this.id = id || -1;
+  constructor(phrase: string | IPhrase) {
+    if (typeof phrase === "string") {
+      this.original = phrase;
+      this.pigLatin = this.pigLatinizePhrase(phrase);
     } else {
-      this.original = originalOrUser.original;
-      this.pigLatin = originalOrUser.pigLatin;
-      this.id = originalOrUser.id;
+      this.original = phrase.original;
+      this.pigLatin = phrase.pigLatin;
     }
+  }
+
+  pigLatinizePhrase(phrase: string): string {
+    const phraseArray = phrase.split(" ");
+    return "";
+  }
+
+  pigLatinizeWord(word: string): string {
+    const vowels = ["a", "e", "i", "o", "u"];
+    const newStr = "";
   }
 }
 
