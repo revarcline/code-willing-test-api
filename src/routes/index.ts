@@ -9,10 +9,10 @@ userRouter.put("/update", updateOneUser);
 userRouter.delete("/delete/:id", deleteOneUser);
 
 // Phrase route
-const phraseRouter = Router();
+//const phraseRouter = Router();
 
 // Export the base-router
 const baseRouter = Router();
 baseRouter.use("/users", userRouter);
 export default baseRouter;
-export default phraseRouter;
+//export default phraseRouter;
