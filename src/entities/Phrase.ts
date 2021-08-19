@@ -19,12 +19,34 @@ class Phrase implements IPhrase {
 
   pigLatinizePhrase(phrase: string): string {
     const phraseArray = phrase.split(" ");
-    return "";
+    const newPhraseArray = phraseArray.map((word: string): string =>
+      this.pigLatinizeWord(word),
+    );
+    return newPhraseArray.join(" ");
   }
 
   pigLatinizeWord(word: string): string {
     const vowels = ["a", "e", "i", "o", "u"];
-    const newStr = "";
+    let mutWord = word;
+    let newWord = "";
+    let storePunc = "";
+
+    if (/[.,?!]/.exec(word[-1])) {
+      storePunc = word[-1];
+      mutWord = word.slice(0, -1);
+    }
+
+    if (vowels.indexOf(mutWord[0]) > -1) {
+      newWord = mutWord.concat("way");
+    } else {
+      const firstMatch = mutWord.match(/[aeiou]/g) || 0;
+      const vowel = mutWord.indexOf(firstMatch[0]);
+      newWord = mutWord
+        .substring(vowel)
+        .concat(mutWord.substring(0, vowel) + "ay");
+    }
+
+    return newWord.concat(storePunc);
   }
 }
 
