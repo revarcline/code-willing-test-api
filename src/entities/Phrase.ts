@@ -27,19 +27,13 @@ class Phrase implements IPhrase {
 
   pigLatinizeWord(word: string): string {
     const vowels = ["a", "e", "i", "o", "u"];
-    let mutWord = [...word];
+    const mutWord = [...word];
     let newWord = "";
-    let storePunc = "";
     // store capitalized status of first letter
     const capitalized = mutWord[0] === mutWord[0].toUpperCase();
 
     if (capitalized) {
       mutWord[0] = mutWord[0].toLowerCase();
-    }
-
-    if (/[.,?!]/.exec(word[-1])) {
-      storePunc = word[-1];
-      mutWord = [...word].slice(0, -1);
     }
 
     if (vowels.includes(mutWord[0])) {
@@ -55,7 +49,7 @@ class Phrase implements IPhrase {
       newWord = newWord[0].toUpperCase() + newWord.substring(1);
     }
 
-    return newWord.concat(storePunc);
+    return newWord;
   }
 }
 

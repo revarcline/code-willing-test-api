@@ -7,7 +7,19 @@ import Phrase, { IPhrase } from "@entities/Phrase";
 import { pErr } from "@shared/functions";
 import { IReqBody, IResponse } from "../support/types";
 
-describe("Phrase Entity", () => {});
+describe("Phrase Entity", () => {
+  it("should correctly transform a phrase starting with a consonant", (done) => {
+    const testPhrase: IPhrase = new Phrase("Hello");
+    expect(testPhrase.pigLatin).toEqual("Ellohay");
+    done();
+  });
+
+  it("should correctly transform a phrase starting with a vowel", (done) => {
+    const testPhrase: IPhrase = new Phrase("Exit");
+    expect(testPhrase.pigLatin).toEqual("Exitway");
+    done();
+  });
+});
 
 /*
 describe("Phrase Routes", () => {
