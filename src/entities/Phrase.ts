@@ -20,36 +20,40 @@ class Phrase implements IPhrase {
   pigLatinizePhrase(phrase: string): string {
     const phraseArray = phrase.split(" ");
     const newPhraseArray = phraseArray.map((word: string): string =>
-      this.pigLatinizeWord(word),
+      this.pigLatinizeWord(word)
     );
     return newPhraseArray.join(" ");
   }
 
   pigLatinizeWord(word: string): string {
     const vowels = ["a", "e", "i", "o", "u"];
-    let mutWord = word;
+    let mutWord = [...word];
     let newWord = "";
     let storePunc = "";
-    const capitalized = mutWord[0] === mutWord[0].toUpperCase()
+    // store capitalized status of first letter
+    const capitalized = mutWord[0] === mutWord[0].toUpperCase();
 
-    if (capitalized) { mutWord[0] = mutWord[0].toLowerCase() }
+    if (capitalized) {
+      mutWord[0] = mutWord[0].toLowerCase();
+    }
 
     if (/[.,?!]/.exec(word[-1])) {
       storePunc = word[-1];
-      mutWord = word.slice(0, -1);
+      mutWord = [...word].slice(0, -1);
     }
 
-    if (vowels.indexOf(mutWord[0]) > -1) {
-      newWord = mutWord.concat("way");
+    if (vowels.includes(mutWord[0])) {
+      newWord = mutWord.join("").concat("way");
     } else {
-      const firstMatch = mutWord.match(/[aeiou]/g) || 0;
-      const vowel = mutWord.indexOf(firstMatch[0]);
       newWord = mutWord
-        .substring(vowel)
-        .concat(mutWord.substring(0, vowel) + "ay");
+        .join("")
+        .substring(1)
+        .concat(mutWord.join("").substring(0, 1) + "ay");
     }
 
-    if (capitalized) { newWord[0] = newWord[0].toUpperCase() }
+    if (capitalized) {
+      newWord = newWord[0].toUpperCase() + newWord.substring(1);
+    }
 
     return newWord.concat(storePunc);
   }

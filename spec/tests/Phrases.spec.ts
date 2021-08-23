@@ -3,12 +3,14 @@ import StatusCodes from "http-status-codes";
 import { SuperTest, Test } from "supertest";
 
 import app from "@server";
-import Phrase, { IPhrase } from "@entities/User";
+import Phrase, { IPhrase } from "@entities/Phrase";
 import { pErr } from "@shared/functions";
-import { paramMissingError } from "@shared/constants";
 import { IReqBody, IResponse } from "../support/types";
 
-describe("Users Routes", () => {
+describe("Phrase Entity", () => {});
+
+/*
+describe("Phrase Routes", () => {
   const phrasesPath = "/api/phrase";
   const transformPhrasePath = `${phrasesPath}/add`;
 
@@ -59,3 +61,4 @@ describe("Users Routes", () => {
   });
 
 });
+*/
