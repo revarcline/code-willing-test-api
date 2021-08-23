@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { transformPhrase } from "./Phrases";
 import { body, validationResult } from "express-validator";
 import StatusCodes from "http-status-codes";
 import { Request, Response } from "express";
@@ -11,11 +10,16 @@ const { BAD_REQUEST, OK } = StatusCodes;
 const phraseRouter = Router();
 phraseRouter.post(
   "/piglatin",
-  // no empties
-  body("phrase").notEmpty().trim(),
-  // only letters, no numbers or punctuation
-  body("phrase").isAlpha(),
+  // only letters, no numbers, punctuation, special chars, or empty input
+  body("phrase")
+    .isAlpha("en-US", { ignore: " " })
+    .withMessage("must only contain alphabetic characters and spaces"),
   (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(BAD_REQUEST).json({ errors: errors.array() });
+    }
+
     const { phrase } = req.body;
     const fullPhrase: IPhrase = new Phrase(phrase);
     return res.status(OK).json({ fullPhrase });
