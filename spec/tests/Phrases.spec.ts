@@ -47,18 +47,16 @@ describe("Phrase Routes", () => {
       done();
     });
 
-    /*
-  it(`should return a JSON object containing an error message and a status code of
-            "${BAD_REQUEST}" if the request was unsuccessful.`, (done) => {
-    // Setup spy
-    const errMsg = "Could not fetch users.";
-    // Call API
-    agent.get(getUsersPath).end((err: Error, res: IResponse) => {
-      pErr(err);
-      expect(res.status).toBe(BAD_REQUEST);
-      expect(res.body.error).toBe(errMsg);
+    it(`should return a JSON object containing an error message and a status code of
+            "${BAD_REQUEST}" if the request was not valid.`, async (done) => {
+      // Setup spy
+      const badPhrase = "42069?";
+      const errMsg = "must only contain alphabetic characters and spaces";
+      // Call API
+      const result = await agent.post(phrasesPath).send({ phrase: badPhrase });
+      expect(result.status).toBe(BAD_REQUEST);
+      expect(result.body.errors[0].msg).toBe(errMsg);
       done();
     });
-    */
   });
 });
