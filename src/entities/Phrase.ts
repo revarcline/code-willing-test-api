@@ -30,6 +30,9 @@ class Phrase implements IPhrase {
     let mutWord = word;
     let newWord = "";
     let storePunc = "";
+    const capitalized = mutWord[0] === mutWord[0].toUpperCase()
+
+    if (capitalized) { mutWord[0] = mutWord[0].toLowerCase() }
 
     if (/[.,?!]/.exec(word[-1])) {
       storePunc = word[-1];
@@ -45,6 +48,8 @@ class Phrase implements IPhrase {
         .substring(vowel)
         .concat(mutWord.substring(0, vowel) + "ay");
     }
+
+    if (capitalized) { newWord[0] = newWord[0].toUpperCase() }
 
     return newWord.concat(storePunc);
   }
