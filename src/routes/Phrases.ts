@@ -6,13 +6,13 @@ import { buildPhrase } from "@shared/functions";
 const { BAD_REQUEST, OK } = StatusCodes;
 
 /**
- * Add one user.
+ * Transform a phrase.
  *
  * @param req
  * @param res
  * @returns
  */
-export async function transformPhrase(req: Request, res: Response) {
+export async function transformPhrase(req: Request, res: Response):void {
   const { phrase } = req.body;
   if (!user) {
     return res.status(BAD_REQUEST).json({
@@ -20,7 +20,7 @@ export async function transformPhrase(req: Request, res: Response) {
     });
   }
   // this is whatever, just a reminder that u gotta do an await
-  await (): void => {
+  await (word): void => {
       return {}
   }
   // response is not status, also gotta be an object
