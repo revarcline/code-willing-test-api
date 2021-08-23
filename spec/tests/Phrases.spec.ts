@@ -32,7 +32,7 @@ describe("Phrase Routes", () => {
 
   describe(`"POST:${phrasesPath}"`, () => {
     it(`should return a JSON object with the original phrase, pig latin version,
-       and status code "${OK}" if the request was successful.`, async (done) => {
+       and status code "${OK}" if the request was successful.`, async () => {
       // Setup spy
       const phrase = "Stinky Hair Away";
       const expectedPhrase = new Phrase("Stinky Hair Away");
@@ -44,11 +44,10 @@ describe("Phrase Routes", () => {
       expect(result.body.fullPhrase.original).toEqual(expectedPhrase.original);
       expect(result.body.fullPhrase.pigLatin).toEqual(expectedPhrase.pigLatin);
       expect(result.body.error).toBeUndefined();
-      done();
     });
 
     it(`should return a JSON object containing an error message and a status code of
-            "${BAD_REQUEST}" if the request was not valid.`, async (done) => {
+            "${BAD_REQUEST}" if the request was not valid.`, async () => {
       // Setup spy
       const badPhrase = "42069?";
       const errMsg = "must only contain alphabetic characters and spaces";
@@ -56,7 +55,6 @@ describe("Phrase Routes", () => {
       const result = await agent.post(phrasesPath).send({ phrase: badPhrase });
       expect(result.status).toBe(BAD_REQUEST);
       expect(result.body.errors[0].msg).toBe(errMsg);
-      done();
     });
   });
 });

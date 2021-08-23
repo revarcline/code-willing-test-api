@@ -10,8 +10,8 @@ const { BAD_REQUEST, OK } = StatusCodes;
 const phraseRouter = Router();
 phraseRouter.post(
   "/piglatin",
-  // only letters, no numbers, punctuation, special chars, or empty input
   body("phrase")
+    // only letters and spaces
     .isAlpha("en-US", { ignore: " " })
     .withMessage("must only contain alphabetic characters and spaces"),
   (req: Request, res: Response) => {
