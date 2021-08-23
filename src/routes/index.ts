@@ -4,7 +4,8 @@ import { body, validationResult } from "express-validator"
 
 // User-route
 const phraseRouter = Router();
-phraseRouter.post("/piglatin", body('phrase').not().isEmpty().trim(), transformPhrase);
+phraseRouter.post("/piglatin", body('phrase').not().isEmpty().trim(),
+                  transformPhrase);
 
 // Export the base-router
 const baseRouter = Router();
